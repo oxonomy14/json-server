@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build --base=/json-server/",
     "preview": "vite preview",
-    "start": "node src/server.js"
+    "start": "node server.js"
   },
   "devDependencies": {
     "glob": "^11.0.0",
