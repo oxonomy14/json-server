@@ -1,31 +1,31 @@
-const express = require('express');
-const fs = require('fs');
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Определяем путь к файлу относительно текущего файла
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const dataPath = path.join(__dirname, 'data', 'test-db.json');
+
+const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
 const app = express();
 const PORT = 3000;
 
-// Middleware для обработки JSON
 app.use(express.json());
 
-// Читаем данные из файла test-data.json
-const data = JSON.parse(fs.readFileSync('/src/data/test-db.json', 'utf8'));
-
-// Эндпоинт для получения списка пользователей
 app.get('/users', (req, res) => {
   res.json(data.users);
 });
 
-// Эндпоинт для получения списка товаров
 app.get('/products', (req, res) => {
   res.json(data.products);
 });
 
-// Эндпоинт для получения заказов
 app.get('/orders', (req, res) => {
   res.json(data.orders);
 });
 
-// Запуск сервера
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
